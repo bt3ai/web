@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schwab Account Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .auth-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px;
+            color: white;
+        }
+        .calculation-section {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 15px;
+            color: white;
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .status-authenticated { background-color: #28a745; }
+        .status-not-authenticated { background-color: #dc3545; }
+        .results-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="main-container p-5">
+                    <div class="text-center mb-5">
+                        <h1 class="display-4 fw-bold text-primary mb-3">
+                            <i class="fas fa-chart-line me-3"></i>
+                            Schwab Account Calculator
+                        </h1>
+                        <p class="lead text-muted">Calculate account totals and analyze option positions</p>
+                    </div>
+
+                    <!-- Authentication Section -->
+                    <div class="auth-section p-4 mb-4">
+                        <h3 class="mb-3">
+                            <i class="fas fa-shield-alt me-2"></i>
+                            Authentication Status
+                        </h3>
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="status-indicator status-not-authenticated" id="authStatus"></span>
+                            <span id="authStatusText">Not Authenticated</span>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button class="btn btn-light btn-custom w-100 mb-3" onclick="openAuthWindow()">
+                                    <i class="fas fa-external-link-alt me-2"></i>
+                                    Open Auth Window
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-outline-light btn-custom w-100 mb-3" onclick="refreshToken()">
+                                    <i class="fas fa-sync-alt me-2"></i>
+                                    Refresh Token
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-outline-light btn-custom w-100 mb-3" onclick="debugSession()">
+                                    <i class="fas fa-bug me-2"></i>
+                                    Debug Session
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-outline-light btn-custom w-100 mb-3" onclick="testUrlParsing()">
+                                    <i class="fas fa-link me-2"></i>
+                                    Test URL Parsing
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <label for="returnedUrl" class="form-label text-white">Paste Returned URL:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="returnedUrl" 
+                                       placeholder="Paste the URL from the auth window here...">
+                                <button class="btn btn-light" onclick="processAuth()">
+                                    <i class="fas fa-check me-2"></i>
+                                    Process
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calculation Section -->
+                    <div class="calculation-section p-4 mb-4">
+                        <h3 class="mb-3">
+                            <i class="fas fa-calculator me-2"></i>
+                            Account Calculations
+                        </h3>
+                        <button class="btn btn-light btn-custom" onclick="calculateTotals()" id="calcBtn" disabled>
+                            <i class="fas fa-calculator me-2"></i>
+                            Calculate Account Totals
+                        </button>
+                    </div>
+
+                    <!-- Results Section -->
+                    <div id="resultsSection" style="display: none;">
+                        <h3 class="mb-3 text-primary">
+                            <i class="fas fa-chart-bar me-2"></i>
+                            Results
+                        </h3>
+                        <div id="resultsContainer"></div>
+                    </div>
+
+                    <!-- Loading Spinner -->
+                    <div id="loadingSpinner" class="text-center" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2 text-muted">Processing...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let authWindow = null;
+        let isAuthenticated = false;
+
+        function openAuthWindow() {
+            const authUrl = '/auth';
+            authWindow = window.open(authUrl, 'authWindow', 'width=800,height=600,scrollbars=yes,resizable=yes');
+        }
+
+        function processAuth() {
+            const returnedUrl = document.getElementById('returnedUrl').value.trim();
+            if (!returnedUrl) {
+                alert('Please paste the returned URL first.');
+                return;
+            }
+
+            showLoading(true);
+
+            fetch('/process_auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `returned_url=${encodeURIComponent(returnedUrl)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                showLoading(false);
+                if (data.success) {
+                    isAuthenticated = true;
+                    updateAuthStatus(true);
+                    document.getElementById('calcBtn').disabled = false;
+                    document.getElementById('returnedUrl').value = '';
+                    alert('Authentication successful! You can now calculate account totals.');
+                } else {
+                    alert('Authentication failed: ' + data.error);
+                }
+            })
+            .catch(error => {
+                showLoading(false);
+                console.error('Error:', error);
+                alert('An error occurred during authentication.');
+            });
+        }
+
+        function refreshToken() {
+            showLoading(true);
+            
+            fetch('/refresh_token')
+            .then(response => response.json())
+            .then(data => {
+                showLoading(false);
+                if (data.success) {
+                    alert('Token refreshed successfully!');
+                } else {
+                    alert('Token refresh failed: ' + data.error);
+                }
+            })
+            .catch(error => {
+                showLoading(false);
+                console.error('Error:', error);
+                alert('An error occurred while refreshing the token.');
+            });
+        }
+
+        function calculateTotals() {
+            if (!isAuthenticated) {
+                alert('Please authenticate first.');
+                return;
+            }
+
+            showLoading(true);
+            document.getElementById('resultsSection').style.display = 'none';
+
+            fetch('/calculate_totals')
+            .then(response => response.json())
+            .then(data => {
+                showLoading(false);
+                if (data.error) {
+                    alert('Calculation failed: ' + data.error);
+                } else {
+                    displayResults(data);
+                }
+            })
+            .catch(error => {
+                showLoading(false);
+                console.error('Error:', error);
+                alert('An error occurred while calculating totals.');
+            });
+        }
+
+        function displayResults(results) {
+            const container = document.getElementById('resultsContainer');
+            let html = '';
+
+            for (const [accountNumber, data] of Object.entries(results)) {
+                if (data.error) {
+                    html += `
+                        <div class="card mb-3 border-danger">
+                            <div class="card-header bg-danger text-white">
+                                <strong>Account ${accountNumber}</strong>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-danger">Error: ${data.error}</p>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Create detailed options breakdown
+                    let uvxyOptionsHtml = '';
+                    let otherOptionsHtml = '';
+                    
+                    // Group UVXY options by underlying symbol and strike
+                    if (data.uvxy_options && data.uvxy_options.length > 0) {
+                        const uvxyGrouped = {};
+                        data.uvxy_options.forEach(option => {
+                            const symbol = option.instrument.underlyingSymbol || 'Unknown';
+                            const strike = option.instrument.strikePrice || 'Unknown';
+                            const expiry = option.instrument.optionExpirationDate || 'Unknown';
+                            const key = `${symbol}-${strike}-${expiry}`;
+                            
+                            if (!uvxyGrouped[key]) {
+                                uvxyGrouped[key] = {
+                                    symbol: symbol,
+                                    strike: strike,
+                                    expiry: expiry,
+                                    quantity: 0,
+                                    contracts: []
+                                };
+                            }
+                            uvxyGrouped[key].quantity += Math.abs(option.shortQuantity || 0);
+                            uvxyGrouped[key].contracts.push(option);
+                        });
+                        
+                        uvxyOptionsHtml = '<div class="mt-2"><strong>UVXY Option Details:</strong><ul class="list-unstyled">';
+                        for (const [key, group] of Object.entries(uvxyGrouped)) {
+                            uvxyOptionsHtml += `<li>• ${group.symbol} Strike: $${group.strike} Exp: ${group.expiry} - ${group.quantity} contracts</li>`;
+                        }
+                        uvxyOptionsHtml += '</ul></div>';
+                    }
+                    
+                    // Group other options by underlying symbol and strike
+                    if (data.other_options && data.other_options.length > 0) {
+                        const otherGrouped = {};
+                        data.other_options.forEach(option => {
+                            const symbol = option.instrument.underlyingSymbol || 'Unknown';
+                            const strike = option.instrument.strikePrice || 'Unknown';
+                            const expiry = option.instrument.optionExpirationDate || 'Unknown';
+                            const key = `${symbol}-${strike}-${expiry}`;
+                            
+                            if (!otherGrouped[key]) {
+                                otherGrouped[key] = {
+                                    symbol: symbol,
+                                    strike: strike,
+                                    expiry: expiry,
+                                    quantity: 0,
+                                    contracts: []
+                                };
+                            }
+                            otherGrouped[key].quantity += Math.abs(option.shortQuantity || 0);
+                            otherGrouped[key].contracts.push(option);
+                        });
+                        
+                        otherOptionsHtml = '<div class="mt-2"><strong>Other Option Details:</strong><ul class="list-unstyled">';
+                        for (const [key, group] of Object.entries(otherGrouped)) {
+                            otherOptionsHtml += `<li>• ${group.symbol} Strike: $${group.strike} Exp: ${group.expiry} - ${group.quantity} contracts</li>`;
+                        }
+                        otherOptionsHtml += '</ul></div>';
+                    }
+
+                    html += `
+                        <div class="card mb-3 border-primary">
+                            <div class="card-header bg-primary text-white">
+                                <strong>Account ${accountNumber}</strong>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <h5 class="text-primary">Total: $${data.total.toLocaleString()}</h5>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="mb-1"><strong>UVXY Options:</strong> ${data.uvxy_total} contracts</p>
+                                        <p class="mb-1"><strong>Other Options:</strong> ${data.other_total} contracts</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="mb-1"><strong>UVXY Value:</strong> $${(500 * data.uvxy_total).toLocaleString()}</p>
+                                        <p class="mb-1"><strong>Other Value:</strong> $${(200 * data.other_total).toLocaleString()}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        ${uvxyOptionsHtml}
+                                    </div>
+                                    <div class="col-md-6">
+                                        ${otherOptionsHtml}
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-3">
+                                    <small class="text-muted">
+                                        <strong>Summary:</strong> ${data.uvxy_total + data.other_total} total option contracts across ${(data.uvxy_options ? data.uvxy_options.length : 0) + (data.other_options ? data.other_options.length : 0)} different option positions
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            container.innerHTML = html;
+            document.getElementById('resultsSection').style.display = 'block';
+        }
+
+        function updateAuthStatus(authenticated) {
+            const statusIndicator = document.getElementById('authStatus');
+            const statusText = document.getElementById('authStatusText');
+            
+            if (authenticated) {
+                statusIndicator.className = 'status-indicator status-authenticated';
+                statusText.textContent = 'Authenticated';
+            } else {
+                statusIndicator.className = 'status-indicator status-not-authenticated';
+                statusText.textContent = 'Not Authenticated';
+            }
+        }
+
+        function showLoading(show) {
+            const spinner = document.getElementById('loadingSpinner');
+            spinner.style.display = show ? 'block' : 'none';
+        }
+
+        function debugSession() {
+            fetch('/debug_session')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Session debug info:', data);
+                alert(`Session Debug Info:\n` +
+                      `Code Verifier: ${data.has_code_verifier ? 'Yes' : 'No'}\n` +
+                      `Access Token: ${data.has_access_token ? 'Yes' : 'No'}\n` +
+                      `Refresh Token: ${data.has_refresh_token ? 'Yes' : 'No'}\n` +
+                      `Session Keys: ${data.session_keys.join(', ')}\n` +
+                      `Code Verifier Length: ${data.code_verifier_length}\n` +
+                      `Access Token Length: ${data.access_token_length}\n` +
+                      `Refresh Token Length: ${data.refresh_token_length}`);
+            })
+            .catch(error => {
+                console.error('Error checking session:', error);
+                alert('Error checking session: ' + error.message);
+            });
+        }
+
+        function testUrlParsing() {
+            const returnedUrl = document.getElementById('returnedUrl').value.trim();
+            if (!returnedUrl) {
+                alert('Please paste a URL first.');
+                return;
+            }
+
+            fetch('/test_url_parsing', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `returned_url=${encodeURIComponent(returnedUrl)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                } else {
+                    console.log('URL parsing result:', data);
+                    alert(`URL Parsing Result:\n` +
+                          `Original URL: ${data.original_url.substring(0, 50)}...\n` +
+                          `Extracted Code: ${data.extracted_code.substring(0, 30)}...\n` +
+                          `Code Length: ${data.code_length}\n` +
+                          `Is Multiple of 4: ${data.is_multiple_of_4 ? 'Yes' : 'No'}\n` +
+                          `Code Start: ${data.code_start}\n` +
+                          `Code End: ${data.code_end}`);
+                }
+            })
+            .catch(error => {
+                console.error('Error testing URL parsing:', error);
+                alert('Error testing URL parsing: ' + error.message);
+            });
+        }
+
+        // Check authentication status on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateAuthStatus(false);
+            checkSessionStatus();
+        });
+
+        function checkSessionStatus() {
+            fetch('/debug_session')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Session debug info:', data);
+                if (data.has_access_token) {
+                    isAuthenticated = true;
+                    updateAuthStatus(true);
+                    document.getElementById('calcBtn').disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Error checking session:', error);
+            });
+        }
+    </script>
+</body>
+</html>

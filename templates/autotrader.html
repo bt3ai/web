@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Autotrader Console</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body { font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; padding: 1rem; background: #f9fafb; }
+  h1 { margin-bottom: 0.5rem; display: inline-block; }
+  a.help-link { margin-left: 1rem; font-size: 0.9rem; text-decoration: none; color: #1d4ed8; }
+  a.help-link:hover { text-decoration: underline; }
+  input { padding: 0.5rem; margin-bottom: 1rem; width: 100%; max-width: 300px; }
+  table { width: 100%; border-collapse: collapse; background: white; table-layout: fixed; }
+  th, td { padding: 0.6rem; border-bottom: 1px solid #ddd; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-align: left; }
+  th { cursor: pointer; background: #f3f4f6; }
+  th:nth-child(1), td:nth-child(1) { width: 60px; }
+  th:nth-child(2), td:nth-child(2) { width: 120px; }
+  th:nth-child(3), td:nth-child(3) { width: 180px; }
+  th:nth-child(4), td:nth-child(4) { width: 240px; }
+  th:nth-child(5), td:nth-child(5) { width: 100px; }
+  th:nth-child(6), td:nth-child(6) { width: 220px; }
+  .actions { display: flex; gap: 0.3rem; justify-content: center; }
+  .actions button { padding: 0.3rem 0.6rem; cursor: pointer; }
+  .pagination { margin-top: 1rem; }
+  .pagination button { padding: 0.4rem 0.7rem; margin-right: 0.25rem; }
+  .modal { display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); }
+  .modal-content { background-color: #fff; margin: 10% auto; padding: 1rem; border: 1px solid #888; width: 90%; max-width: 500px; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+  .modal-content h2 { margin-top: 0; }
+  .modal-content textarea { width: 100%; height: 150px; padding: 0.5rem; margin: 0.5rem 0 1rem 0; resize: vertical; }
+  .modal-content button { padding: 0.4rem 0.8rem; margin-right: 0.5rem; }
+</style>
+</head>
+<body>
+
+<div style="display:flex; justify-content: space-between; align-items: center; margin-bottom:1rem;">
+  <h1 style="margin:0;">Autotrader Console</h1>
+  <a class="help-link" href="../static/symbol.html" target="_blank">Help</a>
+  <a href="/logout" style="float:right;">Logout</a>
+</div>
+
+<input type="text" id="search" placeholder="Search..." />
+
+<table>
+  <thead>
+    <tr id="header-row"></tr>
+  </thead>
+  <tbody id="tbody"></tbody>
+</table>
+
+<div class="pagination" id="pagination"></div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h2>API JSON Editor</h2>
+    <textarea id="jsonInput"></textarea>
+    <div style="text-align:right;">
+      <button id="startBtn">Start</button>
+      <button id="stopBtn">Stop</button>
+      <button id="closeBtn">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script>
+/* ================= CSV DATA ================= */
+const csvData = `
+Id,Account,Symbol,Status,QtyLeft
+1,10067672-0,Alpha,A,0
+2,10067672-1,Beta,B,0
+3,10067672-2,Gamma,A,0
+4,26609977-0,Delta,C,0
+5,26609977-1,Epsilon,B,0
+6,26609977-2,Zeta,A,0
+7,34614483-0,Eta,C,0
+8,34614483-1,Theta,B,0
+9,34614483-2,Iota,A,0
+10,87390906-0,Kappa,C,0
+11,87390906-1,Lambda,B,0
+12,87390906-2,Mu,A,0
+`;
+
+function parseCSV(csv){
+  const lines = csv.trim().split("\n");
+  const headers = lines[0].split(",");
+  const rows = lines.slice(1).map(line => Object.fromEntries(line.split(",").map((v,i)=>[headers[i],v])));
+  return { headers, rows };
+}
+
+const { headers, rows } = parseCSV(csvData);
+const actionColumnName = "Actions";
+
+let currentPage = 1;
+let rowsPerPage = 12;
+let sortColumn = null;
+let sortAsc = true;
+let filteredRows = [...rows];
+let currentRow = null;
+
+/* ================= SOCKET.IO ================= */
+const socket = io();
+
+socket.on('connect', ()=> console.log("Connected!"));
+
+socket.on('response', msg => {
+  console.log("Server says:", msg);
+  if(msg.Id && msg.QtyLeft){
+    const row = rows.find(r => r.Id.toString() === msg.Id.toString());
+    if(row){
+      row.QtyLeft = msg.QtyLeft.toString();
+      renderTable();
+    }
+  }
+});
+
+socket.on('response_symbol', msg => {
+  console.log("Server says:", msg);
+  if(msg.Id && msg.Symbol){
+    const row = rows.find(r => r.Id.toString() === msg.Id.toString());
+    if(row){
+      row.Symbol = msg.Symbol.toString();
+       console.log("Server says inside:", row.Symbol);
+      renderTable();
+    }
+  }
+});
+
+socket.on('response_status', msg => {
+  console.log("Server says:", msg);
+  if(msg.Id && msg.Status){
+    const row = rows.find(r => r.Id.toString() === msg.Id.toString());
+    if(row){
+      row.Status = msg.Status.toString();
+       console.log("Server says inside:", row.Status);
+      renderTable();
+    }
+  }
+});
+/* ================= TABLE FUNCTIONS ================= */
+function renderHeaders(){
+  const headerRow = document.getElementById("header-row");
+  headerRow.innerHTML = "";
+  headers.forEach(h=>{
+    const th = document.createElement("th");
+    th.textContent = h;
+    th.onclick = ()=>sortBy(h);
+    headerRow.appendChild(th);
+  });
+  const actionsTh = document.createElement("th");
+  actionsTh.textContent = actionColumnName;
+  actionsTh.style.cursor = "default";
+  headerRow.appendChild(actionsTh);
+}
+
+function renderTable(){
+  const tbody = document.getElementById("tbody");
+  tbody.innerHTML = "";
+
+  const start = (currentPage-1)*rowsPerPage;
+  const pageRows = filteredRows.slice(start,start+rowsPerPage);
+
+  pageRows.forEach(row=>{
+    const tr = document.createElement("tr");
+    headers.forEach(h=>{
+      const td = document.createElement("td");
+      td.textContent = row[h];
+      tr.appendChild(td);
+    });
+
+    const actionsTd = document.createElement("td");
+    actionsTd.className = "actions";
+
+    const viewBtn = document.createElement("button");
+    viewBtn.textContent = "View";
+    viewBtn.onclick = ()=>{
+      currentRow = row;
+      document.getElementById("jsonInput").value = row.QtyLeft;
+      document.getElementById("modal").style.display = "block";
+    };
+
+    const startBtn = document.createElement("button");
+    startBtn.textContent = "Start";
+    startBtn.onclick = ()=>{
+      if(currentRow){
+        const payload = document.getElementById("jsonInput").value;
+        socket.emit('message', payload); // send to server, will echo back
+      }
+    };
+
+    const stopBtn = document.createElement("button");
+    stopBtn.textContent = "Stop";
+    stopBtn.onclick = ()=>alert(`Stop called for row ID: ${row.Id}`);
+
+    actionsTd.appendChild(viewBtn);
+    actionsTd.appendChild(startBtn);
+    actionsTd.appendChild(stopBtn);
+    tr.appendChild(actionsTd);
+
+    tbody.appendChild(tr);
+  });
+
+  renderPagination();
+}
+
+function renderPagination(){
+  const pageCount = Math.ceil(filteredRows.length / rowsPerPage);
+  const pagination = document.getElementById("pagination");
+  pagination.innerHTML = "";
+  for(let i=1;i<=pageCount;i++){
+    const btn = document.createElement("button");
+    btn.textContent = i;
+    btn.disabled = i===currentPage;
+    btn.onclick = ()=>{ currentPage=i; renderTable(); };
+    pagination.appendChild(btn);
+  }
+}
+
+function sortBy(column){
+  sortAsc = sortColumn===column ? !sortAsc : true;
+  sortColumn = column;
+
+  filteredRows.sort((a,b)=>{
+    const A = a[column], B = b[column];
+    if(!isNaN(A)&&!isNaN(B)) return sortAsc ? A-B : B-A;
+    return sortAsc ? A.localeCompare(B) : B.localeCompare(A);
+  });
+  renderTable();
+}
+
+document.getElementById("search").addEventListener("input",e=>{
+  const q = e.target.value.toLowerCase();
+  filteredRows = rows.filter(r=>Object.values(r).some(v=>v.toLowerCase().includes(q)));
+  currentPage = 1;
+  renderTable();
+});
+
+document.getElementById("closeBtn").onclick = ()=>{ document.getElementById("modal").style.display="none"; };
+window.onclick = e => { if(e.target===document.getElementById("modal")) document.getElementById("modal").style.display="none"; };
+
+/* ================= INIT ================= */
+renderHeaders();
+renderTable();
+</script>
+
+</body>
+</html>

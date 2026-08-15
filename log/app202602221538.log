@@ -1,0 +1,11 @@
+Warning: pandas not available, using fallback JSON processing
+Traceback (most recent call last):
+  File "/home/ubuntu/Schwab-Portfolio/app.py", line 1136, in <module>
+    socketio.run(app, host="127.0.0.1", port=5052,  debug=False)
+  File "/home/ubuntu/.local/lib/python3.9/site-packages/flask_socketio/__init__.py", line 693, in run
+    run_server()
+  File "/home/ubuntu/.local/lib/python3.9/site-packages/flask_socketio/__init__.py", line 670, in run_server
+    eventlet_socket = eventlet.listen(addresses[0][4],
+  File "/home/ubuntu/.local/lib/python3.9/site-packages/eventlet/convenience.py", line 78, in listen
+    sock.bind(addr)
+OSError: [Errno 98] Address already in use

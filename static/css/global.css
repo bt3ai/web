@@ -1,0 +1,13 @@
+html{overflow-y:scroll}
+#swip,
+#swip1 {
+    display: block;
+}
+
+.swip,
+.swip1 {
+    display: none !important;
+}
+#navigation-sticky-wrapper{
+    height:0!important;
+}

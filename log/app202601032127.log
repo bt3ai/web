@@ -1,0 +1,24 @@
+Warning: pandas not available, using fallback JSON processing
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5052
+ * Running on https://172.31.29.180:5052
+[33mPress CTRL+C to quit[0m
+24.44.214.157 - - [03/Jan/2026 21:32:49] "[32mGET / HTTP/1.1[0m" 302 -
+24.44.214.157 - - [03/Jan/2026 21:32:50] "GET /login HTTP/1.1" 200 -
+[2026-01-03 21:32:59,169] ERROR in app: Exception on /login [POST]
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.9/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.9/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.9/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.9/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/ubuntu/Schwab-Portfolio/app.py", line 161, in login
+    flash('Invalid username or password', 'error')
+NameError: name 'flash' is not defined
+24.44.214.157 - - [03/Jan/2026 21:32:59] "[35m[1mPOST /login HTTP/1.1[0m" 500 -

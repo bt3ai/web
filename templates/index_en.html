@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+	<!--<![endif]-->
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="description" content="Big Data Grid Computing parallelism Blockchain idea community social pos">
+
+		<meta name="author" content="Sophie">
+
+		<title>道一</title>
+
+		<!-- Mobile Specific Meta
+		================================================== -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
+
+		<!-- CSS
+		================================================== -->
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/animate.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/owl.carousel.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/component.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/slit-slider.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/media-queries.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/swiper.min.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/global.css') }}">
+	</head>
+
+	<body id="body">
+		<!--
+	    Start Preloader
+	    ==================================== -->
+		<!--<div id="loading-mask">
+			<div class="loading-img">
+				<img alt="Meghna Preloader" src="img/preloader.gif"  />
+			</div>
+		</div>-->
+		<!--
+        End Preloader
+        ==================================== -->
+
+		<!--
+        Fixed Navigation
+        ==================================== -->
+		<header id="navigation" class="navbar navbar-inverse">
+			<div class="container">
+				<div class="navbar-header">
+					<!-- responsive nav button -->
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+					<!-- /responsive nav button -->
+
+					<!-- logo -->
+					<a class="navbar-brand" href="#body">
+						<h1 id="logo">
+							<img src="{{ url_for('static', filename='img/logo-meghna1.png') }}" alt="Meghna" /><span style="width: 50%;text-align: center">道一</span>
+						</h1>
+						</h1>
+					</a>
+					<!-- /logo -->
+				</div>
+
+				<!-- main nav -->
+				<nav class="collapse navbar-collapse navbar-right" role="Navigation">
+					<ul id="nav" class="nav navbar-nav">
+						<li class="current">
+							<a href="#body">首页</a>
+						</li>
+						<li>
+							<a href="#technology">技术</a>
+						</li>
+						<li>
+							<a href="#about">模式</a>
+						</li>
+						<li>
+							<a href="#our-team">团队</a>
+						</li>
+
+						<!-- <li><a href="#showcase">IP</a></li> -->
+						<li>
+							<a href="#contact-us">关于我们</a>
+						</li>
+						<li>
+							<a href="#team-skills">TT客户</a>
+						</li>
+
+						<li>
+							<a href="https://daoyi.ai/schwab">Schwab客户</a>
+						</li>
+
+						<li>
+							<a href="index_en.html">En</a>
+						</li>
+					</ul>
+				</nav>
+				<!-- /main nav -->
+
+			</div>
+		</header>
+		<!--
+        End Fixed Navigation
+        ==================================== -->
+
+		<!--
+        Welcome Slider
+        ==================================== -->
+		<section id="home" style="width: 100%;min-height: 662px !important;overflow: hidden;">
+
+			<div id="slitSlider" class="sl-slider-wrapper">
+				<div class="sl-slider">
+
+					<!-- single slide item -->
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-slide-inner">
+							<div class="bg-img bg-img-1" style="background-image: url('{{ url_for('static', filename='img/slides/1.jpg') }}');">
+</div>
+							<div class="carousel-caption">
+								<div>
+									<h2 data-wow-duration="500ms" data-wow-delay="500ms" class="heading animated fadeInRight">基于人工智能的金融科技平台</h2><br>
+									<h3 class="animated fadeInUp">道一是新一代人工智能金融科技平台</h3>
+									<h3 class="animated fadeInUp">我们将重新定义高科技开发者与他们的客户之间的关系</h3><br>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /single slide item -->
+
+					<!-- single slide item -->
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-slide-inner">
+							<div class="bg-img bg-img-2" style="background-image: url('{{ url_for('static', filename='img/slides/2.jpg') }}');">
+</div>
+							<div class="carousel-caption">
+								<div>
+									<h2 class="heading animated fadeInDown">道一向高科技开发者提供：</h2><br>
+									<h3 class="animated fadeInUp">人工智能算力服务</h3>
+										<h3 class="animated fadeInUp">大数据存储和管理服务 </h3>
+										<h3 class="animated fadeInUp">超高性能海量并行计算服务</h3>
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /single slide item -->
+
+					<!-- single slide item -->
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+						<div class="sl-slide-inner">
+						<div class="bg-img bg-img-3" style="background-image: url('{{ url_for('static', filename='img/slides/3.jpg') }}');">
+</div>
+							<div class="carousel-caption">
+								<div>
+
+						<h2 class="heading animated fadeInDown">道一向持有AI算力的客户提供：</h2><br>
+									<h3 class="animated fadeInUp">免费多项人工智能服务</h3>
+										<h3 class="animated fadeInUp">不低于年化8%的算力月租金 </h3>
+										<h3 class="animated fadeInUp">当前算力租金预期年化：15% </h3>
+										<h3 class="animated fadeInUp"> 保证无理由全款退货</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /single slide item -->
+
+				</div>
+				<!-- /sl-slider -->
+
+				<nav id="nav-arrows" class="nav-arrows">
+					<span class="nav-arrow-prev">Previous</span>
+					<span class="nav-arrow-next">Next</span>
+				</nav>
+
+				<nav id="nav-dots" class="nav-dots">
+					<span class="nav-dot-current"></span>
+					<span></span>
+					<span></span>
+				</nav>
+
+			</div>
+			<!-- /slider-wrapper -->
+		</section>
+		<!--/#home section-->
+
+
+		<!--
+		Start About Section
+		==================================== -->
+		<section id="about" class="bg-one">
+			<div class="container">
+				<div class="row">
+
+					<!-- section title -->
+					<div class="title text-center wow fadeIn" data-wow-duration="1500ms">
+						<h2>核心 <span class="color">模式</span></h2>
+						<div class="border"></div>
+					</div>
+					<!-- /section title -->
+
+					<!-- About item -->
+					<div class="col-md-3 text-center wow fadeInUp" data-wow-duration="500ms">
+						<div class="wrap-about">
+							<div class="icon-box">
+								<i class="fa fa-laptop fa-4x"></i>
+							</div>
+							<!-- Express About Yourself -->
+							<div class="about-content text-center">
+								<h3 class="ddd">共识</h3>
+								<p>每个人都在共识机制下开发可扩展的各种商业活动</p>
+							</div>
+						</div>
+					</div>
+					<!-- End About item -->
+
+					<!-- About item -->
+					<div class="col-md-3 text-center wow fadeInUp" data-wow-duration="500ms">
+						<div class="wrap-about">
+							<div class="icon-box">
+								<i class="fa fa-users fa-4x"></i>
+							</div>
+							<!-- Express About Yourself -->
+							<div class="about-content text-center">
+								<h3 class="ddd">社区</h3>
+								<p>欢迎全球范围所有对高新技术感兴趣的人群</p>
+							</div>
+						</div>
+					</div>
+					<!-- End About item -->
+
+					<!-- About item -->
+					<div class="col-md-3 text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="250ms">
+						<div class="wrap-about">
+							<div class="icon-box">
+								<i class="fa fa-lightbulb-o fa-4x"></i>
+							</div>
+							<!-- Express About Yourself -->
+							<div class="about-content text-center">
+								<h3>思想</h3>
+								<p>有趣的想法可以驱动整个世界，我们为您的梦想助力</p>
+							</div>
+						</div>
+					</div>
+					<!-- End About item -->
+
+					<!-- About item -->
+					<div class="col-md-3 text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="500ms">
+						<div class="wrap-about kill-margin-bottom">
+							<div class="icon-box">
+								<i class="fa fa-graduation-cap fa-4x"></i>
+							</div>
+							<!-- Express About Yourself -->
+							<div class="about-content text-center">
+								<h3>专业</h3>
+								<p>聚集业界最权威专家</p>
+							</div>
+						</div>
+					</div>
+					<!-- End About item -->
+
+				</div>
+				<!-- End row -->
+			</div>
+			<!-- End container -->
+		</section>
+		<!-- End section -->
+
+		<!--
+		Start Counter Section
+		==================================== -->
+
+		<section id="counter" class="parallax-section">
+			<div class="container">
+				<div class="row">
+
+					<!-- first count item -->
+					<div class="col-md-3 col-sm-6 col-xs-12 text-center wow fadeInDown" data-wow-duration="500ms">
+						<div class="counters-item">
+							<div>
+								<span data-speed="3000" data-to="320">320</span>
+							</div>
+							<i class="fa fa-users fa-3x"></i>
+							<h3>Happy Clients</h3>
+						</div>
+					</div>
+					<!-- end first count item -->
+
+					<!-- second count item -->
+					<div class="col-md-3 col-sm-6 col-xs-12 text-center wow fadeInDown" data-wow-duration="500ms" data-wow-delay="200ms">
+						<div class="counters-item">
+							<div>
+								<span data-speed="3000" data-to="565">565</span>
+							</div>
+							<i class="fa fa-check-square fa-3x"></i>
+							<h3>Projects completed</h3>
+						</div>
+					</div>
+					<!-- end second count item -->
+
+					<!-- third count item -->
+					<div class="col-md-3 col-sm-6 col-xs-12 text-center wow fadeInDown" data-wow-duration="500ms" data-wow-delay="400ms">
+						<div class="counters-item">
+							<div>
+								<span data-speed="3000" data-to="95">95</span>
+								<span>%</span>
+							</div>
+							<i class="fa fa-thumbs-up fa-3x"></i>
+							<h3>Positive feedback</h3>
+
+						</div>
+					</div>
+					<!-- end third count item -->
+
+					<!-- fourth count item -->
+					<div class="col-md-3 col-sm-6 col-xs-12 text-center wow fadeInDown" data-wow-duration="500ms" data-wow-delay="600ms">
+						<div class="counters-item kill-margin-bottom">
+							<div>
+								<span data-speed="3000" data-to="2500">2500</span>
+							</div>
+							<i class="fa fa-coffee fa-3x"></i>
+							<h3>Cups of Coffee</h3>
+						</div>
+					</div>
+					<!-- end fourth count item -->
+
+				</div>
+				<!-- end row -->
+			</div>
+			<!-- end container -->
+		</section>
+		<!-- end section -->
+
+		<!-- Start technology Section
+		==================================== -->
+
+		<section id="technology" class="bg-one">
+			<div class="container">
+				<div class="row">
+
+					<!-- section title -->
+					<div class="title text-center wow fadeIn" data-wow-duration="500ms">
+						<h2>核心 <span class="color">技术</span></h2>
+						<div class="border"></div>
+					</div>
+					<!-- /section title -->
+					<!-- Single Service Item -->
+					<article class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms">
+						<div class="service-block text-center">
+							<div class="service-icon text-center">
+								<i class="fa fa-cubes fa-5x"></i>
+							</div>
+							<h3>高性能云平台</h3>
+							<p>龙链云具有大规模并行计算高性和大数据相结合，可实现高达100k TPS。 </p>
+							<br>
+						</div>
+					</article>
+					<!-- End Single Service Item -->
+
+					<!-- Single Service Item -->
+					<article class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms">
+						<div class="service-block text-center">
+							<div class="service-icon text-center">
+								<i class="fa fa-user-plus fa-5x"></i>
+							</div>
+							<h3>人工智能</h3>
+							<p>微数据、大数据、人工智能服务，神经网络 </p>
+							<br><br>
+						</div>
+					</article>
+					<!-- End Single Service Item -->
+
+					<!-- Single Service Item -->
+					<article class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms">
+						<div class="service-block text-center">
+							<div class="service-icon text-center">
+								<i class="fa fa-gears fa-5x"></i>
+							</div>
+							<h3>POS 4.0</h3>
+							<p>龙链云采用节能高效的Proof of Stake V4.0，完全规避51%攻击，带来全新安全体验 </p><br>
+						</div>
+					</article>
+					<!-- End Single Service Item -->
+
+					<!-- Single Service Item -->
+					<article class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="200ms">
+						<div class="service-block text-center">
+							<div class="service-icon text-center">
+								<i class="fa fa-code fa-5x"></i>
+							</div>
+							<h3>Python代码接入</h3>
+
+							<p>我们的连接器能动态下载Python源代码运行，并支持缓存选项
+								<p>
+									<br><br>
+						</div>
+					</article>
+					<!-- End Single Service Item -->
+
+					<!-- Single Service Item -->
+					<article class="col-md-3 col-sm-6 col-xs-12 wow fadeInDown" data-wow-duration="500ms" data-wow-delay="200ms">
+						<div class="service-block text-center">
+							<div class="service-icon text-center">
+								<i class="fa fa-link fa-5x"></i>
+							</div>
+							<h3>流程图设计工具</h3>
+							<br>
+							<p>龙链云提供开发者软件流程图设计工具，使其能迅速开发出达到商业需求的软件</p>
+						</div>
+					</article>
+					<!-- End Single Service Item -->
+
+					<!-- Single Service Item -->
+					<article class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="400ms">
+						<div class="service-block text-center">
+							<div class="service-icon text-center">
+								<i class="fa fa-object-ungroup fa-5x"></i>
+							</div>
+							<h3>多种资产交易</h3>
+							<br>
+							<p>同一公链多资产共存，交易、结算相互独立</p>
+							<br>
+						</div>
+					</article>
+					<!-- End Single Service Item -->
+
+					<!-- Single Service Item -->
+					<article class="col-md-3 col-sm-6 col-xs-12 wow fadeInDown" data-wow-duration="500ms" data-wow-delay="400ms">
+						<div class="service-block text-center">
+							<div class="service-icon text-center">
+								<i class="fa fa-flash fa-5x"></i>
+							</div>
+							<h3>大规模并行计算</h3>
+							<br>
+							<p>高达10万每秒交易吞吐量，确保业务高性能运行</p>
+							<br>
+						</div>
+					</article>
+					<!-- End Single Service Item -->
+
+					<!-- Single Service Item -->
+					<article class="col-md-3 col-sm-6 col-xs-12 wow fadeInDown" data-wow-duration="500ms" data-wow-delay="600ms">
+						<div class="service-block text-center kill-margin-bottom">
+							<div class="service-icon text-center">
+								<i class="fa fa-sitemap fa-5x"></i>
+							</div>
+							<h3>大数据分布式存储</h3>
+							<br>
+							<p>高性能分布式数据库集群作为大数据的解决方案</p>
+							<br>
+						</div>
+					</article>
+					<!-- End Single Service Item -->
+
+				</div>
+				<!-- End row -->
+			</div>
+			<!-- End container -->
+		</section>
+		<!-- End section -->
+		<!-- Start Testimonial
+		=========================================== -->
+
+		<!--
+    Start Blog Section
+    =========================================== -->
+		<section id="blog" class="bg-one">
+			<div class="container">
+				<div class="row">
+
+					<!-- section title -->
+					<div class="title text-center wow fadeInDown">
+						<h2> 区块链 <span class="color">人工智能</span></h2>
+						<div class="border"></div>
+					</div>
+					<!-- /section title -->
+
+					<div class="clearfix">
+
+						<!-- single blog post -->
+						<article class="col-md-6 col-sm-6 col-xs-12 clearfix wow fadeInUp" data-wow-duration="500ms">
+							<div class="note">
+								<div class="media-wrapper">
+									<video id="video1"
+       src="{{ url_for('static', filename='video/ai.mp4') }}"
+       poster="{{ url_for('static', filename='img/ai.png') }}"
+       class="img-responsive">
+										您的浏览器不支持 video 标签。
+									</video>
+								</div>
+								<center>
+									<div class="btn-group btn-group-sm" role="group" align="center" style="margin-top:-10px;">
+										<button type="button" class="btn btn-sm btn-default" id="play1">
+                        <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                  </button>
+										<button type="button" class="btn btn-x btn-default" id="pause1">
+                        <span class="glyphicon glyphicon-pause"></span>
+                  </button>
+									</div>
+								</center>
+								<div class="excerpt">
+									<h3>区块链+AI</h3>
+									<p>道一将区块链与人工智能深度结合，为社区中的每一位参与者提供智能投顾，不仅可以通过社区实现您的Idea，而且使您的数字资产收益最大化。</p>
+									<!-- <a class="btn btn-transparent" href="#">了解更多</a> -->
+								</div>
+							</div>
+						</article>
+						<!-- /single blog post -->
+
+						<!-- single blog post -->
+						<article class="col-md-6 col-sm-6 col-xs-12 clearfix wow fadeInUp" data-wow-duration="500ms">
+							<div class="note">
+								<div class="media-wrapper">
+									<video id="video2"
+       src="{{ url_for('static', filename='video/ai2.mp4') }}"
+       poster="{{ url_for('static', filename='img/ai2.jpg') }}"
+       class="img-responsive">
+										您的浏览器不支持 video 标签。
+									</video>
+								</div>
+								<center>
+									<div class="btn-group btn-group-sm" role="group" align="center" style="margin-top:-10px;">
+										<button type="button" class="btn btn-sm btn-default" id="play2">
+                        <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                  </button>
+										<button type="button" class="btn btn-x btn-default" id="pause2">
+                        <span class="glyphicon glyphicon-pause"></span>
+                  </button>
+									</div>
+								</center>
+								<div class="excerpt">
+									<h3>案例演示</h3>
+									<p>AI案例技术逻辑演示。</p>
+									<br/>
+									<!-- <a class="btn btn-transparent" href="#">了解更多</a> -->
+								</div>
+							</div>
+						</article>
+						<!-- /single blog post -->
+					</div>
+
+				</div>
+				<!-- end row -->
+			</div>
+			<!-- end container -->
+		</section>
+		<!-- end section -->
+
+
+
+		<!-- Start Team Skills
+		=========================================== -->
+
+		<section id="team-skills" class="parallax-section">
+			<div class="container">
+				<div class="row wow fadeInDown" data-wow-duration="500ms">
+
+					<!-- section title -->
+					<div class="title text-center">
+						<h2>高科技开发者 <span class="color">加盟道一</span></h2>
+						<div class="border"></div>
+					</div>
+					<!-- /section title -->
+
+					<!-- skill set -->
+					<div class="col-md-2 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms">
+						<div class="skill-chart text-center">
+							<span class="chart" data-percent="100">
+								<span class="percent"></span>
+							</span>
+							<h3><i class="fa fa-sitemap"></i> 开发者</h3>
+							<p>数据或软件开发者，请联系并加盟道一： help@daoyi.ai</p>
+						</div>
+					</div>
+					<!-- end skill set -->
+
+					<!-- skill set -->
+					<div class="col-md-2 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="200ms">
+						<div class="skill-chart text-center">
+							<span class="chart" data-percent="100">
+								<span class="percent"></span>
+							</span>
+							<h3><i class="fa fa-gavel"></i> 专业性</h3>
+							<p>业内专家全程护航</p>
+						</div>
+					</div>
+					<!-- end skill set -->
+
+					<!-- skill set -->
+					<div class="col-md-2 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="400ms">
+						<div class="skill-chart text-center">
+							<span class="chart" data-percent="100">
+								<span class="percent"></span>
+							</span>
+							<h3><i class="fa fa-paper-plane"></i> 定制化</h3>
+							<p>我们可定制化整合您的AI服务给我们的客户</p>
+						</div>
+					</div>
+					<!-- end skill set -->
+
+					<!-- skill set -->
+					<div class="col-md-2 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="600ms">
+						<div class="skill-chart text-center">
+							<span class="chart" data-percent="100">
+								<span class="percent"></span>
+							</span>
+							<h3><i class="fa fa-user"></i> 共识</h3>
+							<p>追求公平的商业治理模式</p>
+						</div>
+					</div>
+					<!-- end skill set -->
+
+					<!-- skill set -->
+					<div class="col-md-2 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="600ms">
+						<div class="skill-chart text-center">
+							<span class="chart" data-percent="100">
+								<span class="percent"></span>
+							</span>
+							<h3><i class="fa fa-dollar"></i> 思想变现</h3>
+							<p>尊重知识，优秀点子直接变现</p>
+						</div>
+					</div>
+					<!-- end skill set -->
+
+					<!-- skill set -->
+					<div class="col-md-2 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="600ms">
+						<div class="skill-chart text-center">
+							<span class="chart" data-percent="100">
+								<span class="percent"></span>
+							</span>
+							<h3><i class="fa fa-recycle"></i> 可持续发展</h3>
+							<p>科技不断完善自我，与时俱进</p>
+						</div>
+					</div>
+					<!-- end skill set -->
+
+				</div>
+				<!-- End row -->
+			</div>
+			<!-- End container -->
+		</section>
+		<!-- End section -->
+
+		<!-- Start Our Team
+    		=========================================== -->
+
+		<section id="our-team">
+			<div class="container">
+				<div class="row">
+
+					<!-- section title -->
+					<div class="title text-center wow fadeInUp member-info-one" data-wow-duration="500ms">
+						<h2>核心<span class="color">团队</span></h2>
+						<div class="border"></div>
+					</div>
+					<!-- /section title -->
+					<!-- team member -->
+					<div class="col-md-2 col-sm-6 wow fadeInDown member-info-one" data-wow-duration="500ms" data-wow-delay="200ms">
+						<article class="team-mate">
+							<div class="member-photo">
+								<!-- member photo -->
+								<img class="img-responsive" src="{{ url_for('static', filename='img/team/member-2.jpg') }}" alt="Meghna">
+								<!-- /member photo -->
+
+								<!-- member social profile -->
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="#"><i class="fa fa-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="fa fa-twitter"></i></a>
+										</li>
+
+
+									</ul>
+								</div>
+								<!-- /member social profile -->
+							</div>
+
+							<!-- member name & designation -->
+							<div class="member-title">
+								<h3>丁江</h3>
+								<span>创始人</span>
+							</div>
+							<!-- /member name & designation -->
+
+							<!-- about member -->
+							<div class="member-info-en">
+								<p>南京大学天文学学士，美国计算机和机械工程双硕士，16年华尔街工作经验，曾就职纽约高盛，摩根斯坦利，加拿大皇家银行等，长期从事计算机金融方面工作，对多种金融固收产品及其衍生品深有研究，曾在加拿大皇家银行领导区块链方面的研究开发。</p>
+							</div>
+							<!-- /about member -->
+						</article>
+					</div>
+					<!-- end team member -->
+					<!-- team member -->
+						<!--<p>成功大學工業與資訊管理博士生,清華大學工業工程碩士,台北大學企管碩士,奇菱光電 IE副理,東台精機 董事長特助,譁泰精機 製造中心協理,聚和國際 總經理室經理,中衛發展中心 精實改善外聘顧問,企業顧問輔導,5G推動與目視管理,工業化3.0+,AI + IOT結合運用</p>-->
+					<!-- end team member -->
+					<!-- team member -->
+					<div class="col-md-2 col-sm-6 wow fadeInDown member-info-one" data-wow-duration="500ms" data-wow-delay="600ms">
+						<article class="team-mate kill-margin-bottom">
+							<div class="member-photo">
+								<!-- member photo -->
+								<img class="img-responsive" src="{{ url_for('static', filename='img/team/member-7.jpg') }}" alt="Meghna">
+								<!-- /member photo -->
+
+								<!-- member social profile -->
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="#"><i class="fa fa-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="fa fa-twitter"></i></a>
+										</li>
+
+
+									</ul>
+								</div>
+								<!-- /member social profile -->
+							</div>
+
+							<!-- member name & designation -->
+							<div class="member-title">
+								<h3><span style="font-size:14px;display:inline;">Karlil Amisial</span></h3>
+								<span>联合创始人</span>
+							</div>
+							<!-- /member name & designation -->
+
+							<!-- about member -->
+							<div class="member-info-en">
+								<p>毕业于纽约大学理工学院，拥有金融工程师和计算机科学两个硕士学位，曾在高盛(Goldman Sachs)、瑞士信贷(Credit Suisse)和加拿大皇家银行(RBC)等华尔街公司工作。 Karlil是投资银行的专家，作为投资银行RBC的董事，他对抵押贷款衍生品定价和定量分析有深入的了解，Karlil专注于管理道一基金会，并在美国和南美国家扩展社区。
+								</p>
+							</div>
+							<!-- /about member -->
+						</article>
+					</div>
+					<!-- end team member -->
+
+					<!-- team member -->
+					<div class="col-md-2 col-sm-6 wow fadeInDown member-info-one" data-wow-duration="500ms">
+						<article class="team-mate">
+							<div class="member-photo">
+								<!-- member photo -->
+								<img class="img-responsive" src="{{ url_for('static', filename='img/team/member-1.jpg') }}" alt="Meghna">
+								<!-- /member photo -->
+
+								<!-- member social profile -->
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="#"><i class="fa fa-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="fa fa-twitter"></i></a>
+										</li>
+									</ul>
+								</div>
+								<!-- /member social profile -->
+							</div>
+
+							<!-- member name & designation -->
+							<div class="member-title">
+								<h3><span style="font-size:12px;display:inline;">Ilyas Dyussengaliyev</span></h3>
+								<span>联合创始人</span>
+							</div>
+							<!-- /member name & designation -->
+
+							<!-- about member -->
+							<div class="member-info-en">
+								<p>2011年毕业于中阿肯色州大学，获得国际小型经济学学士学位。 2015年毕业于纳扎尔巴耶夫大学，获得公共政策硕士学位。 2017年在哈萨克斯坦阿斯塔纳投资发展城市中心任部门经理， 2015-2016在哈萨克斯坦国家原子能公司市场销售部门任部门经理。
+								</p>
+							</div>
+							<!-- /about member -->
+
+						</article>
+					</div>
+					<!-- end team member -->
+					<!-- team member -->
+					<div class="col-md-2 col-sm-6 wow fadeInDown member-info-one" data-wow-duration="500ms" data-wow-delay="400ms">
+						<article class="team-mate">
+							<div class="member-photo">
+								<!-- member photo -->
+								<img class="img-responsive" src="{{ url_for('static', filename='img/team/member-3.jpg') }}" alt="Meghna">
+								<!-- /member photo -->
+
+								<!-- member social profile -->
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="#"><i class="fa fa-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="fa fa-twitter"></i></a>
+										</li>
+
+
+									</ul>
+								</div>
+								<!-- /member social profile -->
+							</div>
+
+							<!-- member name & designation -->
+							<div class="member-title">
+								<h3>俞永康</h3>
+								<span>专家顾问</span>
+							</div>
+							<!-- /member name & designation -->
+
+							<!-- about member -->
+							<div class="member-info-en">
+								<p>畢業於台灣大學經濟系，為十五年經驗之連續創業家，小說作家、Unity主任工程師，及演算法工程師。Ray具備豐富人文素養及縝密邏輯思考能力、專精社群運營及遊戲化，曾於網際網路初期創立知名文學網及千人大型論壇，並曾創辦連鎖文教機構及獨立遊戲公司。 因為對人工智慧的高度興趣，Ray在由遊戲工程師轉入AI領域深研後，曾陸續發表CI概論、聲納回歸算法，並組建帶領一高端人工智慧團隊，包含機械工程博士、大數據專家、資深遊戲工程師、大學心理教授、心理諮商學者、金馬獎評審等技術、心理、人文學術專業人才，共同研發編寫「最了解人心」之雙主核微數據AI。 進入道一團隊後，Ray將率領AISA團隊，全力研發包括超零知識加密、葉立體演算等全球獨家技術，齊心朝向區塊鏈 + AI + IOT的最高技術殿堂邁進。</p>
+							</div>
+							<!-- /about member -->
+						</article>
+					</div>
+					<!-- end team member -->
+					<!-- team member -->
+					<div class="col-md-2 col-sm-6 wow fadeInDown member-info-one" data-wow-duration="500ms" data-wow-delay="600ms">
+						<article class="team-mate kill-margin-bottom">
+							<div class="member-photo">
+								<!-- member photo -->
+								<img class="img-responsive" src="{{ url_for('static', filename='img/team/member-8.jpg') }}" alt="Meghna">
+								<!-- /member photo -->
+
+								<!-- member social profile -->
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="#"><i class="fa fa-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="fa fa-twitter"></i></a>
+										</li>
+
+
+									</ul>
+								</div>
+								<!-- /member social profile -->
+							</div>
+
+							<!-- member name & designation -->
+							<div class="member-title">
+								<h3>莊力文</h3>
+								<span>专家顾问</span>
+							</div>
+							<!-- /member name & designation -->
+
+							<!-- about member -->
+							<div class="member-info-en">
+								<p>國立臺灣科技大學 機械工程系 博士 鴻海科技集團 機器人開發專案統籌 所羅門股份有限公司 國外業務經理 國立台灣科技大學 機器人研發人員 國立台灣科技大學 人工智能系統研發人員 Taipei American School 授課老師 iCub.org AI Developer 台科大智慧型機器人研究中心 機器人開發人員 專長：機器人開發統籌、視覺辨識系統、 類神經網路自主學習系統、影像處理程式開發、表情辨識系統開發
+								</p>
+							</div>
+							<!-- /about member -->
+						</article>
+					</div>
+					<!-- end team member -->
+					<!-- team member -->
+					<div class="col-md-2 col-sm-6 wow fadeInDown member-info-one" data-wow-duration="500ms" data-wow-delay="400ms">
+						<article class="team-mate">
+							<div class="member-photo">
+								<!-- member photo -->
+								<img class="img-responsive" src="{{ url_for('static', filename='img/team/member-9.jpg') }}" alt="Meghna">
+								<!-- /member photo -->
+
+								<!-- member social profile -->
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="#"><i class="fa fa-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="fa fa-twitter"></i></a>
+										</li>
+
+
+									</ul>
+								</div>
+								<!-- /member social profile -->
+							</div>
+
+							<!-- member name & designation -->
+							<div class="member-title">
+								<h3><span style="font-size:14px;display:inline;">Tom Hochstatter</span></h3>
+								<span>专家顾问</span>
+							</div>
+							<!-- /member name & designation -->
+
+							<!-- about member -->
+							<div class="member-info-en">
+								<p>Tom Hochstatter目前担任Dominion Harbor集团首席战略官。他拥有30年的在财富500强企业（波音、IBM、微软、雅虎）和许多初创企业的技术销售、市场营销、产品开发和业务/企业发展等方面的执行领导经验。最近，Tom曾是idealAsset的首席执行官,并于2016年通过Dominion Harbor集团对idealAsset的收购来到Dominion Harbor。</p>
+							</div>
+							<!-- /about member -->
+						</article>
+					</div>
+					<!-- end team member -->
+
+					<!-- team member -->
+					<!--<div class="col-md-2 col-sm-6 wow fadeInDown member-info-one" data-wow-duration="500ms" data-wow-delay="600ms">
+						<article class="team-mate kill-margin-bottom">
+							<div class="member-photo">
+
+								<img class="img-responsive" src="img/team/member-10.jpg" alt="Meghna">
+
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="#"><i class="fa fa-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="fa fa-twitter"></i></a>
+										</li>
+
+									</ul>
+								</div>
+
+							</div>
+
+							<div class="member-title">
+								<h3>杨凤生</h3>
+								<span>专家顾问</span>
+							</div>
+
+							<div class="member-info-en">
+								<p>1992年毕业于清华大学，1996年宾夕法尼亚大学EE硕士，曾任职 UBS PaineWebber投资顾问， 擅长美/中宏观经济研究及以对冲套利为主的多策略投资组合的管理。目前在美国硅谷从事专户(managed account)及筹划对冲基金。</p>
+							</div>
+
+						</article>
+					</div>-->
+					<!-- end team member -->
+					<!-- team member -->
+					<div class="col-md-2 col-sm-6 wow fadeInDown member-info-one" data-wow-duration="500ms" data-wow-delay="600ms">
+						<article class="team-mate kill-margin-bottom">
+							<div class="member-photo">
+								<!-- member photo -->
+								<img class="img-responsive" src="{{ url_for('static', filename='img/team/member-11.jpg') }}" alt="Meghna">
+								<!-- /member photo -->
+
+								<!-- member social profile -->
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="#"><i class="fa fa-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="fa fa-twitter"></i></a>
+										</li>
+
+
+									</ul>
+								</div>
+								<!-- /member social profile -->
+							</div>
+
+							<!-- member name & designation -->
+							<div class="member-title">
+								<h3>Geoge Li</h3>
+								<span>专家顾问</span>
+							</div>
+							<!-- /member name & designation -->
+
+							<!-- about member -->
+							<div class="member-info-en">
+								<p>复旦大学毕业，哥伦比亚大学博士, 任职Bank of America 量化分析师，是20年华尔街工作经验的资深量化分析师，硅谷顶尖风投机构Greylock Partners的社区总监， 社区项目的创办者和领导者，Startup Digest联合创始人，斯坦福大学著名创业奖学金蒂尔奖学金和StartX创业孵化器资历最深的导师和顾问之一，并帮助加州理工州立大学启动创业计划。</p>
+							</div>
+							<!-- /about member -->
+						</article>
+					</div>
+					<!-- end team member -->
+
+					<!-- team member -->
+					<div class="col-md-2 col-sm-6 wow fadeInDown member-info-one" data-wow-duration="500ms" data-wow-delay="600ms">
+						<article class="team-mate kill-margin-bottom">
+							<div class="member-photo">
+								<!-- member photo -->
+								<img class="img-responsive" src="{{ url_for('static', filename='img/team/member-2.jpg') }}" alt="Meghna">
+								<!-- /member photo -->
+
+								<!-- member social profile -->
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="#"><i class="fa fa-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="fa fa-twitter"></i></a>
+										</li>
+
+
+									</ul>
+								</div>
+								<!-- /member social profile -->
+							</div>
+
+							<!-- member name & designation -->
+							<div class="member-title">
+								<h3>殷建文</h3>
+								<span>专家顾问</span>
+							</div>
+							<!-- /member name & designation -->
+
+							<!-- about member -->
+							<div class="member-info-en">
+								<p>计算机专家，Texas A&M University 计算机博士，拥有27项美国专利，其中18项已授权， 参与和领导了多项计算机系统管理国际标准的制定。企业家， 联合创建多家公司, 美国Obonok及宁波奥科合伙人， 董事长，负责产品销售，在短短两年内，打造自主品牌并在十几个国家建立分销渠道。 现任美国知识产权交易平台idealAsset副总。
+								</p>
+							</div>
+							<!-- /about member -->
+						</article>
+					</div>
+					<!-- end team member -->
+					<!-- team member -->
+					<div class="col-md-2 col-sm-6 wow fadeInDown member-info-one" data-wow-duration="500ms" data-wow-delay="600ms">
+						<article class="team-mate kill-margin-bottom">
+							<div class="member-photo">
+								<!-- member photo -->
+								<img class="img-responsive" src="{{ url_for('static', filename='img/team/member-13.jpg') }}" alt="Meghna">
+								<!-- /member photo -->
+
+								<!-- member social profile -->
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="#"><i class="fa fa-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="fa fa-twitter"></i></a>
+										</li>
+
+
+									</ul>
+								</div>
+								<!-- /member social profile -->
+							</div>
+
+							<!-- member name & designation -->
+							<div class="member-title">
+								<h3><span style="font-size:14px;display:inline;">Mendy Piekarski</span></h3>
+								<span>法律顾问</span>
+							</div>
+							<!-- /member name & designation -->
+
+							<!-- about member -->
+							<div class="member-info-en">
+								<p>
+									Piekarski 先生在波士顿大学法学院获得法律博士学位，在该法学院他是银行与金融法 期刊(Journal of Banking and Financial Law) 的成员。 Piekarski 先生在宾汉顿大学 (Binghamton University) 获得计量金融学专业本科学位，并且是该大学荣誉课程的成员。 Piekarski 先生于 2015 年加入 SRFF 的商业诉讼与仲裁执业小组。 Piekarski 的执业领域主要集中于州和联邦法院以及仲裁法庭的证券和复杂商业诉讼。 他还在证券交易委员会 (SEC)、金融行业监管局 (FINRA) 及其他美国监管机构出庭代表企业和个人。 加入 SRFF 之前，Piekarski 先生是一家小型证券诉讼和白领辩护律师事务所的准合伙律师。 Piekarski 在纽约州检察官办公室投资者保护局开始了自己的律师职业生涯，在那他调查、起诉纽约证券法的违法案件。 之后 Piekarski 先生担任 SEC 行政法法官的法律职员，处理各类联邦证券事务。
+								</p>
+							</div>
+							<!-- /about member -->
+						</article>
+					</div>
+					<!-- end team member -->
+					<!-- team member -->
+					<div class="col-md-2 col-sm-6 wow fadeInDown member-info-one" data-wow-duration="500ms" data-wow-delay="600ms">
+						<article class="team-mate kill-margin-bottom">
+							<div class="member-photo">
+								<!-- member photo -->
+								<img class="img-responsive" src="{{ url_for('static', filename='img/team/member-14.jpg') }}" alt="Meghna">
+								<!-- /member photo -->
+
+								<!-- member social profile -->
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="#"><i class="fa fa-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#"><i class="fa fa-twitter"></i></a>
+										</li>
+
+
+									</ul>
+								</div>
+								<!-- /member social profile -->
+							</div>
+
+							<!-- member name & designation -->
+							<div class="member-title">
+								<h3><span style="font-size:14px;display:inline;">Jay Kaplowitz</span></h3>
+								<span>法律顾问</span>
+							</div>
+							<!-- /member name & designation -->
+
+							<!-- about member -->
+							<div class="member-info-en">
+								<p>
+									波士顿大学，法学博士 布鲁克林学院，B.A MKaplowitz 先生为中小型企业提供有关企业融资、证券交易委员会 (SEC) 信息披露事宜、公司管理， 以及包括股票发行、高收益交易和可转换债券产品在内的公开发行和私募融资方面的咨询建议
+								</p>
+							</div>
+							<!-- /about member -->
+						</article>
+					</div>
+					<!-- end team member -->
+				</div>
+				<!-- End row -->
+			</div>
+			<!-- End container -->
+		</section>
+		<!-- End section -->
+
+
+		<!-- Srart Contact Us
+		=========================================== -->
+		<section id="contact-us">
+			<div class="container">
+				<div class="row">
+
+					<!-- section title -->
+					<div class="title text-center wow fadeIn" data-wow-duration="500ms">
+						<h2>关于 <span class="color">我们</span></h2>
+						<div class="border"></div>
+					</div>
+					<!-- /section title -->
+
+					<!-- Contact Details -->
+					<div class="contact-info col-md-6 wow fadeInUp" data-wow-duration="500ms">
+
+						<p>道一集团由丁江先生创立于2024年，丁江先生毕业于南京大学天文系，94年赴美留学，获美国双硕士学位，拥有25年华尔街经验，曾在纽约高盛和摩根斯坦利工作多年，曾是中国知名金融科技公司太一云的联合创始人，道一专注打造基于人工智能的金融科技平台，我们的宗旨是重塑互联网的高科技公司与广大客户之间的关系，我们为高科技开发者提供更优化的各项基础服务，我们也为广大客户提供完全免费的软件服务，同时还可以提供远高于银行利息的人工智能算力月租金给我们的客户。</p>
+						<div class="contact-details">
+							<div class="con-info clearfix">
+								<i class="fa fa-home fa-lg"></i>
+								<span>深圳市 龙华区 民治街道 民乐社区 星河world 二期C栋 2106</span>
+							</div>
+							<div class="con-info clearfix">
+								<i class="fa fa-home fa-lg"></i>
+								<span>30 Beatrice Place，Oradell，New Jersey USA 07649</span>
+							</div>
+							<div class="con-info clearfix">
+								<i class="fa fa-envelope fa-lg"></i>
+								<span>Email: help@daoyi.ai</span>
+							</div>
+						</div>
+					</div>
+					<!-- / End Contact Details -->
+
+				</div>
+				<!-- end row -->
+			</div>
+			<!-- end container -->
+		</section>
+		<!-- end section -->
+		<!-- end Contact Area
+		========================================== -->
+
+		<!--<section id="our-team">
+			<div class="container">
+				<div class="row">
+
+					&lt;!&ndash; section title &ndash;&gt;
+					<div class="title text-center wow fadeInUp" data-wow-duration="500ms">
+						<h2>合作 <span class="color">伙伴</span></h2>
+						<div class="border"></div>
+					</div>
+					&lt;!&ndash; /section title &ndash;&gt;
+					&lt;!&ndash; team member &ndash;&gt;
+					<div class="col-md-2 col-sm-6 wow fadeInDown" data-wow-duration="500ms" data-wow-delay="200ms">
+						<article class="team-mate">
+							<div class="member-photo">
+								&lt;!&ndash; member photo &ndash;&gt;
+								<img class="img-responsive" src="img/partner/partner-1.png" alt="Meghna">
+								&lt;!&ndash; /member photo &ndash;&gt;
+
+								&lt;!&ndash; member social profile &ndash;&gt;
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="http://www.bcex.ca/coins" target="_blank"><i class="fa fa-dribbble"></i></a>
+										</li>
+									</ul>
+								</div>
+								&lt;!&ndash; /member social profile &ndash;&gt;
+							</div>
+						</article>
+					</div>
+					&lt;!&ndash; end team member &ndash;&gt;
+					&lt;!&ndash; team member &ndash;&gt;
+					<div class="col-md-2 col-sm-6 wow fadeInDown" data-wow-duration="500ms">
+						<article class="team-mate">
+							<div class="member-photo">
+								&lt;!&ndash; member photo &ndash;&gt;
+								<img class="img-responsive" src="img/partner/partner-2.png" alt="Meghna">
+								&lt;!&ndash; /member photo &ndash;&gt;
+
+								&lt;!&ndash; member social profile &ndash;&gt;
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="https://www.allcoin.com/" target="_blank"><i class="fa fa-dribbble"></i></a>
+										</li>
+									</ul>
+								</div>
+								&lt;!&ndash; /member social profile &ndash;&gt;
+							</div>
+						</article>
+					</div>
+					&lt;!&ndash; end team member &ndash;&gt;
+
+					&lt;!&ndash; team member &ndash;&gt;
+					<div class="col-md-2 col-sm-6 wow fadeInDown" data-wow-duration="500ms" data-wow-delay="400ms">
+						<article class="team-mate">
+							<div class="member-photo">
+								&lt;!&ndash; member photo &ndash;&gt;
+								<img class="img-responsive" src="img/partner/partner-3.png" alt="Meghna">
+								&lt;!&ndash; /member photo &ndash;&gt;
+
+								&lt;!&ndash; member social profile &ndash;&gt;
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="http://cnet.global/" target="_blank"><i class="fa fa-dribbble"></i></a>
+										</li>
+									</ul>
+								</div>
+								&lt;!&ndash; /member social profile &ndash;&gt;
+							</div>
+						</article>
+					</div>
+					&lt;!&ndash; end team member &ndash;&gt;
+
+					&lt;!&ndash; team member &ndash;&gt;
+					<div class="col-md-2 col-sm-6 wow fadeInDown" data-wow-duration="500ms" data-wow-delay="400ms">
+						<article class="team-mate">
+							<div class="member-photo">
+								&lt;!&ndash; member photo &ndash;&gt;
+								<img class="img-responsive" src="img/partner/partner-4.png" alt="Meghna">
+								&lt;!&ndash; /member photo &ndash;&gt;
+
+								&lt;!&ndash; member social profile &ndash;&gt;
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="https://my-asia.com/" target="_blank"><i class="fa fa-dribbble"></i></a>
+										</li>
+									</ul>
+								</div>
+								&lt;!&ndash; /member social profile &ndash;&gt;
+							</div>
+						</article>
+					</div>
+					&lt;!&ndash; end team member &ndash;&gt;
+
+					&lt;!&ndash; team member &ndash;&gt;
+					<div class="col-md-2 col-sm-6 wow fadeInDown" data-wow-duration="500ms">
+						<article class="team-mate">
+							<div class="member-photo">
+								&lt;!&ndash; member photo &ndash;&gt;
+								<img class="img-responsive" src="img/partner/partner-5.png" alt="Meghna">
+								&lt;!&ndash; /member photo &ndash;&gt;
+
+								&lt;!&ndash; member social profile &ndash;&gt;
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="http://srfkllp.com/" target="_blank"><i class="fa fa-dribbble"></i></a>
+										</li>
+									</ul>
+								</div>
+								&lt;!&ndash; /member social profile &ndash;&gt;
+							</div>
+						</article>
+					</div>
+					&lt;!&ndash; end team member &ndash;&gt;
+
+					&lt;!&ndash; team member &ndash;&gt;
+					<div class="col-md-2 col-sm-6 wow fadeInDown" data-wow-duration="500ms" data-wow-delay="200ms">
+						<article class="team-mate">
+							<div class="member-photo">
+								&lt;!&ndash; member photo &ndash;&gt;
+								<img class="img-responsive" src="img/partner/partner-6.png" alt="Meghna">
+								&lt;!&ndash; /member photo &ndash;&gt;
+
+								&lt;!&ndash; member social profile &ndash;&gt;
+								<div class="mask">
+									<ul class="clearfix">
+										<li>
+											<a href="#"><i class="fa fa-dribbble"></i></a>
+										</li>
+									</ul>
+								</div>
+								&lt;!&ndash; /member social profile &ndash;&gt;
+							</div>
+							&lt;!&ndash; /about member &ndash;&gt;
+						</article>
+					</div>
+					&lt;!&ndash; end team member &ndash;&gt;
+				</div>
+				&lt;!&ndash; End row &ndash;&gt;
+			</div>
+			&lt;!&ndash; End container &ndash;&gt;
+		</section>-->
+		<!-- End section -->
+
+		<footer id="footer" class="bg-one">
+			<div class="container">
+				<div class="row wow fadeInUp" data-wow-duration="500ms">
+					<div class="col-lg-12">
+
+						<!-- Footer Social Links -->
+						<div class="social-icon">
+							<ul>
+								<li>
+									<a href="https://zh-tw.facebook.com/"><i class="fa fa-facebook"></i></a>
+								</li>
+								<li>
+									<a href="https://mobile.twitter.com/"><i class="fa fa-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-google-plus"></i></a>
+								</li>
+								<li>
+									<a href="https://www.youtube.com/"><i class="fa fa-youtube"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-linkedin"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-dribbble"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-pinterest"></i></a>
+								</li>
+							</ul>
+						</div>
+						<!--/. End Footer Social Links -->
+
+						<!-- copyright -->
+						<div class="copyright text-center">
+							<a href="index.html">
+								<img src="{{ url_for('static', filename='img/logo-meghna1.png') }}" alt="Meghna" />
+							</a>
+							<br />
+
+							<p>Copyright &copy; 2024. Daoyi.ai All rights reserved.</p>
+						</div>
+						<!-- /copyright -->
+
+					</div>
+					<!-- end col lg 12 -->
+				</div>
+				<!-- end row -->
+			</div>
+			<!-- end container -->
+		</footer>
+		<!-- end footer -->
+
+		<!-- Back to Top
+		============================== -->
+		<a href="javascript:;" id="scrollUp">
+			<i class="fa fa-angle-up fa-2x"></i>
+		</a>
+
+		<!-- end Footer Area
+		========================================== -->
+
+		<!--
+    Essential Scripts
+    =====================================-->
+
+<!-- Main jQuery -->
+<script src="{{ url_for('static', filename='js/jquery-1.10.2.min.js') }}"></script>
+
+<!-- Bootstrap 3.1 -->
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+<!-- Slitslider -->
+<script src="{{ url_for('static', filename='js/jquery.slitslider.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.ba-cond.min.js') }}"></script>
+
+<!-- Parallax -->
+<script src="{{ url_for('static', filename='js/jquery.parallax-1.1.3.js') }}"></script>
+
+<!-- Owl Carousel -->
+<script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+
+<!-- Portfolio Filtering -->
+<script src="{{ url_for('static', filename='js/jquery.mixitup.min.js') }}"></script>
+
+<!-- Custom Scrollbar -->
+<script src="{{ url_for('static', filename='js/jquery.nicescroll.min.js') }}"></script>
+
+<!-- Jappear js -->
+<script src="{{ url_for('static', filename='js/jquery.appear.js') }}"></script>
+
+<!-- Pie Chart -->
+<script src="{{ url_for('static', filename='js/easyPieChart.js') }}"></script>
+
+<!-- jQuery Easing -->
+<script src="{{ url_for('static', filename='js/jquery.easing-1.3.pack.js') }}"></script>
+
+<!-- tweetie.min -->
+<script src="{{ url_for('static', filename='js/tweetie.min.js') }}"></script>
+
+<!-- Highlight menu item -->
+<script src="{{ url_for('static', filename='js/jquery.nav.js') }}"></script>
+
+<!-- Sticky Nav -->
+<script src="{{ url_for('static', filename='js/jquery.sticky.js') }}"></script>
+
+<!-- Number Counter Script -->
+<script src="{{ url_for('static', filename='js/jquery.countTo.js') }}"></script>
+
+<!-- wow.min Script -->
+<script src="{{ url_for('static', filename='js/wow.min.js') }}"></script>
+
+<!-- For video responsive -->
+<script src="{{ url_for('static', filename='js/jquery.fitvids.js') }}"></script>
+
+<!-- Grid js -->
+<script src="{{ url_for('static', filename='js/grid.js') }}"></script>
+
+<!-- Custom js -->
+<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+
+<!-- Control the video play and pause -->
+<script src="{{ url_for('static', filename='js/video.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/swiper.min.js') }}"></script>
+		<script>
+			var _hmt = _hmt || [];
+			(function() {
+				var hm = document.createElement("script");
+				hm.src = "https://hm.baidu.com/hm.js?ab09103600e4252d890566aa0a12b5d8";
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(hm, s);
+			})();
+			var swiper = new Swiper('.swiper-container', {
+				slidesPerView: 4,
+				loop: true,
+				autoplay: {
+					delay: 3000, //1秒切换一次
+				},
+				pagination: {
+					el: '.swiper-pagination',
+					clickable: true,
+				},
+			});
+			//  //鼠标覆盖停止自动切换
+			swiper.el.onmouseover = function() {
+				swiper.autoplay.stop();
+			};
+//				$(function () { $("[data-toggle='tooltip']").tooltip(); });
+		</script>
+
+	</body>
+
+</html>

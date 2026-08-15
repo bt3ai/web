@@ -1,0 +1,215 @@
+Below is a **practical, production-ready way** to integrate **CI/CD from GitKraken → GitHub → AWS EC2**, with **zero manual SSH / zero prompts**, and works perfectly with how you’re already pushing code.
+
+> ⚠️ Important clarification
+> **GitKraken itself does NOT run CI/CD**.
+> It manages Git. CI/CD is done by **GitHub Actions / GitLab CI / Bitbucket Pipelines**, etc.
+
+The **correct architecture** is:
+
+```
+GitKraken (local)
+   ↓ git push
+GitHub
+   ↓ GitHub Actions (CI/CD)
+AWS EC2 (deploy)
+```
+
+---
+
+## ✅ Recommended Setup (Best Practice)
+
+### ✔ CI/CD engine: **GitHub Actions**
+
+### ✔ Deployment target: **AWS EC2**
+
+### ✔ Auth: **SSH deploy key** (no passwords, no prompts)
+
+---
+
+## 🔐 STEP 1 — Prepare AWS EC2 (ONE TIME)
+
+### 1️⃣ Create deploy user (recommended)
+
+```bash
+sudo adduser deploy
+sudo usermod -aG sudo deploy
+su - deploy
+```
+
+---
+
+### 2️⃣ Generate SSH key on GitHub side (NOT on EC2)
+
+This will be used **only by GitHub Actions**.
+
+On your **local machine**:
+
+```bash
+ssh-keygen -t ed25519 -C "github-actions-autotrader"
+```
+
+Files:
+
+```
+id_ed25519_autotrader
+id_ed25519_autotrader.pub
+```
+
+---
+
+### 3️⃣ Add public key to EC2
+
+```bash
+ssh deploy@YOUR_EC2_IP
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+nano ~/.ssh/authorized_keys
+```
+
+Paste:
+
+```text
+id_ed25519_autotrader.pub
+```
+
+```bash
+chmod 600 ~/.ssh/authorized_keys
+```
+
+---
+
+## 🔑 STEP 2 — Configure GitHub Secrets
+
+Go to:
+
+```
+GitHub Repo → Settings → Secrets and variables → Actions
+```
+
+Add secrets:
+
+| Name          | Value                                   |
+| ------------- | --------------------------------------- |
+| `EC2_HOST`    | `xx.xx.xx.xx`                           |
+| `EC2_USER`    | `deploy`                                |
+| `EC2_SSH_KEY` | **contents of `id_ed25519_autotrader`** |
+| `APP_DIR`     | `/home/deploy/Schwab-Portfolio`         |
+
+---
+
+## ⚙️ STEP 3 — Add GitHub Actions Workflow
+
+Create file:
+
+```bash
+mkdir -p .github/workflows
+nano .github/workflows/deploy.yml
+```
+
+### ✅ `deploy.yml`
+
+```yaml
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Setup SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
+        ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Deploy to EC2
+      run: |
+        ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+        set -e
+        cd ${{ secrets.APP_DIR }}
+        git pull origin main
+        source venv/bin/activate || true
+        pip install -r requirements.txt
+        sudo systemctl restart autotrader || true
+        EOF
+```
+
+Commit it:
+
+```bash
+git add .github/workflows/deploy.yml
+git commit -m "Add CI/CD deploy pipeline"
+git push
+```
+
+---
+
+## 🚀 STEP 4 — How This Works (End-to-End)
+
+1. You edit code in **GitKraken**
+2. Click **Push**
+3. GitHub receives commit
+4. **GitHub Actions auto-runs**
+5. EC2 pulls code & restarts app
+6. ✅ Deployment done
+
+**No SSH login**
+**No passwords**
+**No tokens**
+**No manual steps**
+
+---
+
+## 🧠 Optional Enhancements (Recommended)
+
+### 🔁 Zero-Downtime Restart
+
+Use `systemd` or `gunicorn --reload`
+
+### 🐳 Docker-based Deploy
+
+Even cleaner & safer
+
+### 🔐 Harden SSH
+
+Restrict deploy key to one repo
+
+### 📊 Observability
+
+Add Slack/Email on failure
+
+---
+
+## ❌ What NOT to do
+
+* ❌ CI/CD from inside GitKraken
+* ❌ Store EC2 keys in repo
+* ❌ Use HTTPS tokens for deploys
+* ❌ Manual `ssh` + `git pull` in prod
+
+---
+
+## ✅ Final Verdict
+
+**GitKraken → GitHub Actions → EC2** is the **correct, industry-standard CI/CD path**.
+
+If you want, I can:
+
+* Convert this to **Docker-based CI/CD**
+* Add **rollback on failure**
+* Add **staging vs prod**
+* Add **Blue/Green deploy**
+* Secure with **IAM + SSM (no SSH at all)**
+
+Just tell me 👍
+
+#test

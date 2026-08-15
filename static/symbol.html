@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dataset Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 1rem;
+      background: #f9fafb;
+    }
+
+    h1, h2, h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      margin-bottom: 2rem;
+    }
+
+    th, td {
+      padding: 0.6rem;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      cursor: pointer;
+      background: #f3f4f6;
+    }
+
+    th:hover {
+      background: #e5e7eb;
+    }
+
+    .pagination {
+      margin-bottom: 2rem;
+    }
+
+    .pagination button {
+      padding: 0.4rem 0.7rem;
+      margin-right: 0.25rem;
+      cursor: pointer;
+    }
+
+    /* ===== JSON GROUPING ===== */
+    .json-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .json-header {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    .json-header span {
+      margin-right: 0.4rem;
+      font-size: 0.9rem;
+    }
+
+    .json-items {
+      margin-left: 1.5rem;
+      padding-left: 1rem;
+      border-left: 2px solid #374151;
+      margin-top: 0.75rem;
+      display: none;
+    }
+
+    .json-item {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 0.4rem;
+      right: 0.4rem;
+      background: #1f2933;
+      color: #e5e7eb;
+      border: 1px solid #374151;
+      padding: 0.2rem 0.4rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .copy-btn:hover {
+      background: #374151;
+    }
+
+    .json-block {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-family: monospace;
+      font-size: 0.85rem;
+      white-space: pre;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Dataset Viewer</h1>
+
+
+<table>
+  <thead>
+    <tr id="header-row"></tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<div class="pagination" id="pagination"></div>
+
+
+<div id="jsonMessages"></div>
+
+<script>
+/* ================= CSV DATA ================= */
+const csvData = `
+
+`;
+
+function parseCSV(csv) {
+  const lines = csv.trim().split("\n");
+  const headers = lines[0].split(",");
+  const rows = lines.slice(1).map(line =>
+    Object.fromEntries(
+      line.split(",").map((v, i) => [headers[i], v])
+    )
+  );
+  return { headers, rows };
+}
+
+const { headers, rows } = parseCSV(csvData);
+
+/* ================= TABLE ================= */
+let currentPage = 1;
+let rowsPerPage = 20;
+let sortColumn = null;
+let sortAsc = true;
+let filteredRows = [...rows];
+
+function renderHeaders() {
+  const hr = document.getElementById("header-row");
+  hr.innerHTML = "";
+  headers.forEach(h => {
+    const th = document.createElement("th");
+    th.textContent = h;
+    th.onclick = () => sortBy(h);
+    hr.appendChild(th);
+  });
+}
+
+function renderTable() {
+  const tbody = document.querySelector("tbody");
+  tbody.innerHTML = "";
+  filteredRows.slice(0, rowsPerPage).forEach(r => {
+    const tr = document.createElement("tr");
+    headers.forEach(h => {
+      const td = document.createElement("td");
+      td.textContent = r[h];
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+}
+
+
+
+
+/* ================= JSON DATA ================= */
+const jsonMessages = [
+  {
+    "accountNumber": "34614483",
+    "assetType": "OPTION",
+    "gapinterval": 0,
+    "gapprice": 0,
+    "instruction": "SELL_TO_OPEN",
+    "interval": 6,
+    "maxRunNumber": 100,
+    "orderType": "LIMIT",
+    "price": 3.5,
+    "quantity": 1,
+    "symbol": "QQQ   270115P00210000",
+    "threadNumber": 0
+  },
+  {
+    "accountNumber": "34614483",
+    "assetType": "OPTION",
+    "gapinterval": 0,
+    "gapprice": 0,
+    "instruction": "SELL_TO_OPEN",
+    "interval": 6,
+    "maxRunNumber": 100,
+    "orderType": "LIMIT",
+    "price": 3.5,
+    "quantity": 1,
+    "symbol": "QQQ   260618P00254780",
+    "threadNumber": 0
+  },
+  {
+    "accountNumber": "34614483",
+    "assetType": "OPTION",
+    "gapinterval": 0,
+    "gapprice": 0,
+    "instruction": "SELL_TO_OPEN",
+    "interval": 6,
+    "maxRunNumber": 100,
+    "orderType": "LIMIT",
+    "price": 3.5,
+    "quantity": 1,
+    "symbol": "GLD   280121P00150000",
+    "threadNumber": 0
+  },
+  {
+    "accountNumber": "34614483",
+    "assetType": "OPTION",
+    "gapinterval": 0,
+    "gapprice": 0,
+    "instruction": "SELL_TO_OPEN",
+    "interval": 6,
+    "maxRunNumber": 100,
+    "orderType": "LIMIT",
+    "price": 3.5,
+    "quantity": 1,
+    "symbol": "VXX   260618P00054780",
+    "threadNumber": 0
+  },
+
+{
+  "accountNumber": "34614483",
+  "assetType": "OPTION",
+  "gapinterval": 0,
+  "gapprice": 0,
+  "instruction": "SELL_TO_OPEN",
+  "interval": 6,
+  "maxRunNumber": 100,
+  "orderType": "LIMIT",
+  "price": 3.5,
+  "quantity": 1,
+  "symbol": "TSLA  260821P00060000",
+  "threadNumber": 0
+},
+
+{
+  "accountNumber": "34614483",
+  "assetType": "OPTION",
+  "gapinterval": 0,
+  "gapprice": 0,
+  "instruction": "BUY_TO_CLOSE",
+  "interval": 4,
+  "maxRunNumber": 7,
+  "orderType": "LIMIT",
+  "price": 0.28,
+  "quantity": 1,
+  "symbol": "TSLA  270115P00040000",
+  "threadNumber": 0
+},
+
+{
+  "accountNumber": "10067672",
+  "assetType": "OPTION",
+  "gapinterval": 0,
+  "gapprice": 0,
+  "instruction": "BUY_TO_CLOSE",
+  "interval": 4,
+  "maxRunNumber": 5,
+  "orderType": "LIMIT",
+  "price": 0.16,
+  "quantity": 1,
+  "symbol": "TSLA  260821P00050000",
+  "threadNumber": 0
+},
+{
+  "accountNumber": "34614483",
+  "assetType": "OPTION",
+  "gapinterval": 0,
+  "gapprice": 0,
+  "instruction": "BUY_TO_CLOSE",
+  "interval": 6,
+  "maxRunNumber": 100,
+  "orderType": "LIMIT",
+  "price": 0.4,
+  "quantity": 1,
+  "symbol": "AAPL  270115P00100000",
+  "threadNumber": 0
+},
+{ 
+  "accountNumber": "34614483", 
+  "assetType": "OPTION", 
+  "gapinterval": 0, 
+  "gapprice": 0, 
+  "instruction": "BUY_TO_CLOSE", 
+  "interval": 6, 
+  "maxRunNumber": 100, 
+  "orderType": "LIMIT", 
+  "price": 0.22, 
+  "quantity": 1, 
+  "symbol": "NVDA  260618P00067000", 
+  "threadNumber": 0 
+},
+{
+  "accountNumber": "34614483",
+  "assetType": "OPTION",
+  "gapinterval": 0,
+  "gapprice": 0,
+  "instruction": "SELL_TO_OPEN",
+  "interval": 6,
+  "maxRunNumber": 10,
+  "orderType": "LIMIT",
+  "price": 0.27,
+  "quantity": 1,
+  "symbol": "VXX   260417C00080000",
+  "threadNumber": 0
+}
+
+
+];
+
+
+/* ================= RENDER JSON ================= */
+function renderJSONMessages() {
+  const container = document.getElementById("jsonMessages");
+  container.innerHTML = "";
+
+  const groups = {};
+  jsonMessages.forEach(m => {
+    const key = m.symbol.trim().split(/\s+/)[0];
+    groups[key] ??= [];
+    groups[key].push(m);
+  });
+
+  Object.entries(groups).forEach(([symbol, items]) => {
+    const group = document.createElement("div");
+    group.className = "json-group";
+
+    const header = document.createElement("div");
+    header.className = "json-header";
+    header.innerHTML = `<span>▶</span>${symbol}`;
+
+    const itemsDiv = document.createElement("div");
+    itemsDiv.className = "json-items";
+
+    header.onclick = () => {
+      const open = itemsDiv.style.display === "block";
+      itemsDiv.style.display = open ? "none" : "block";
+      header.querySelector("span").textContent = open ? "▶" : "▼";
+    };
+
+    items.forEach(obj => {
+      const item = document.createElement("div");
+      item.className = "json-item";
+
+      const pre = document.createElement("pre");
+      pre.className = "json-block";
+      pre.textContent = JSON.stringify(obj, null, 2);
+
+      const btn = document.createElement("button");
+      btn.className = "copy-btn";
+      btn.textContent = "Copy";
+      btn.onclick = () => {
+        navigator.clipboard.writeText(pre.textContent);
+        btn.textContent = "Copied";
+        setTimeout(() => btn.textContent = "Copy", 1000);
+      };
+
+      item.appendChild(btn);
+      item.appendChild(pre);
+      itemsDiv.appendChild(item);
+    });
+
+    group.appendChild(header);
+    group.appendChild(itemsDiv);
+    container.appendChild(group);
+  });
+}
+
+/* ================= INIT ================= */
+renderHeaders();
+renderTable();
+renderJSONMessages();
+</script>
+
+</body>
+</html>
