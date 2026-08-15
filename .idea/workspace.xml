@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8fbb714f-33aa-4a54-afee-edc9940ef545" name="Changes" comment="chg logo">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="8fbb714f-33aa-4a54-afee-edc9940ef545" name="Changes" comment="chg words">
       <change beforePath="$PROJECT_DIR$/templates/index_cn.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index_cn.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,7 +110,15 @@
       <option name="project" value="LOCAL" />
       <updated>1786822890146</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="chg words">
+      <option name="closed" value="true" />
+      <created>1786825456763</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1786825456763</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,6 +130,7 @@
     <MESSAGE value="test a" />
     <MESSAGE value="add BT3 ads" />
     <MESSAGE value="chg logo" />
-    <option name="LAST_COMMIT_MESSAGE" value="chg logo" />
+    <MESSAGE value="chg words" />
+    <option name="LAST_COMMIT_MESSAGE" value="chg words" />
   </component>
 </project>
